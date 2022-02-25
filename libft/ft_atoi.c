@@ -6,63 +6,45 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 19:38:41 by cyelena           #+#    #+#             */
-/*   Updated: 2022/02/04 19:38:43 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/02/25 22:00:59 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_index(int *i, int *sign);
-static int	ft_body(const char *nptr, int i, int sign);
-
-int	ft_atoi(const char *nptr)
+static void	error(void)
 {
-	int			i;
-	int			sign;
-
-	ft_index(&i, &sign);
-	while (nptr[i] == ' ' || nptr[i] == '\t' || nptr[i] == '-' \
-			|| nptr[i] == '+' || nptr[i] == '\n' || nptr[i] == '\r'\
-			|| nptr[i] == '\v' || nptr[i] == '\f')
-	{
-		if (nptr[i] == '-')
-		{
-			sign *= -1;
-			if (nptr[i + 1] < 48 || nptr[i + 1] > 57)
-				return (0);
-		}	
-		if (nptr[i] == '+')
-		{
-			if (nptr[i + 1] < 48 || nptr[i + 1] > 57)
-				return (0);
-		}
-		i++;
-	}
-	return (ft_body(nptr, i, sign));
+	ft_putstr_fd("error", 2);
+	exit(1);
 }
 
-static int	ft_body(const char *nptr, int i, int sign)
+static long int	ft_maxmin(long int k)
 {
-	long int	sum;
-
-	sum = 0;
-	while (nptr[i] >= 48 && nptr[i] <= 57)
-	{
-		sum = sum * 10 + (nptr[i] - '0');
-		i++;
-		if (sum < 0)
-		{
-			if (sign < 0)
-				return (0);
-			else
-				return (-1);
-		}
-	}
-	return (sum * sign);
+	if (k > INT_MAX)
+		error();
+	if (k < INT_MIN)
+		error();
+	return (k);
 }
 
-static void	ft_index(int *i, int *sign)
+int	ft_atoi(const char *str)
 {
-	*i = 0;
-	*sign = 1;
+	long int	res;
+	int			negative;
+
+	negative = 1;
+	res = 0;
+	while (*str && (*str == ' ' || *str == '\n' || *str == '\t' || \
+		*str == '\v' || *str == '\f' || *str == '\r'))
+	++str;
+	if (*str == '-')
+		negative = -1;
+	if (*str == '-' || *str == '+')
+		++str;
+	while (*str && *str >= '0' && *str <= '9')
+	{
+		res = res * 10 + (*str - 48);
+		++str;
+	}
+	return (ft_maxmin(res * negative));
 }

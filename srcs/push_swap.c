@@ -6,28 +6,11 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 11:06:34 by cyelena           #+#    #+#             */
-/*   Updated: 2022/02/23 17:34:10 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/02/25 21:38:50 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/push_swap.h"
-
-// char	*ft_line(int argc, char **argv)
-// {
-// 	char	*line_array;
-// 	int		i;
-
-// 	i = 2;
-// 	printf ("argc %d\n", argc);
-// 	printf ("argv %s\n", argv[1]);
-// 	line_array = argv[1];
-// 	while (i < argc)
-// 	{
-// 		line_array = ft_strjoin(ft_strjoin(line_array, " "), argv[i]);
-// 		i++;
-// 	}
-// 	return (line_array);
-// }
 
 int	ft_digit_value(char *argv)
 {
@@ -70,16 +53,19 @@ int	ft_not_repeat(int argc, char **argv)
 		return (1);
 	i = -1;
 	while (++i < argc - 1)
-	{
 		array[i] = ft_atoi(argv[i + 1]);
-	}
 	i = -1;
 	while (++i < argc - 2)
 	{
 		j = i;
 		while (++j < argc - 1)
+		{
 			if (array[i] == array[j])
+			{
+				free (array);
 				return (1);
+			}
+		}
 	}
 	free (array);
 	return (0);
@@ -108,16 +94,61 @@ int	checker(int argc, char **argv)
 	return (0);
 }
 
+int	*ft_array(int argc, char **argv)
+{
+	int	*array;
+	int	i;
+
+	array = malloc(sizeof(int) * (argc - 1));
+	if (array == NULL)
+		exit (1);
+	i = -1;
+	while (++i < argc - 1)
+		array[i] = ft_atoi(argv[i + 1]);
+	i = -1;
+	return (array);
+}
+
+void	ft_sort_array(int *array, int argc)
+{
+	int	i;
+	int	j;
+	int	temp;
+
+	i = -1;
+	while (++i < argc - 1)
+	{
+		j = -1;
+		while (++j < argc - i - 2)
+		{
+			if (array[j] > array[j + 1])
+			{
+				temp = array[j];
+				array[j] = array[j + 1];
+				array[j + 1] = temp;
+			}
+		}
+	}
+}
+
 int	main(int argc, char **argv)
 {
+	int	*array;
+
 	if (checker(argc, argv) > 0)
 	{
 		ft_putstr_fd("error", 2);
+		return (1);
 	}
-	// char	*line_array;
-	// char	**array;
-
-	// line_array = ft_line(argc, argv);
-	// array = ft_split(line_array, " ");
+	if (argc == 1)
+		return (0);
+	array = ft_array(argc, argv);
+	ft_sort_array(array, argc);
+	int	i = 0;
+	while (i < argc - 1)
+	{
+		printf("%d\n",array[i]);
+		i++;
+	}
 	return (0);
 }
