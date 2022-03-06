@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 11:06:40 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/06 20:28:48 by cyelena          ###   ########.fr       */
+/*   Created: 2022/03/06 16:01:52 by cyelena           #+#    #+#             */
+/*   Updated: 2022/03/06 16:01:53 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include "../libft/libft.h"
-
-typedef struct s_median
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int	max;
-	int	min;
-	int	median;
-}	t_median;
+	t_list	*copy_list;
+	t_list	*cp_list;
 
-typedef struct s_stacks
-{
-	t_list			*a;
-	t_list			*b;
-	int				size;
-	int				*array;
-	//struct s_stacks	*next;
-}	t_stacks;
-
-#endif
+	copy_list = NULL;
+	while (lst && f)
+	{
+		cp_list = ft_lstnew(f(lst -> content));
+		if (!cp_list)
+		{
+			ft_lstclear(&copy_list, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&copy_list, cp_list);
+		lst = lst -> next;
+	}
+	return (copy_list);
+}

@@ -6,14 +6,16 @@
 #    By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 19:03:07 by cyelena           #+#    #+#              #
-#    Updated: 2022/02/23 17:40:08 by cyelena          ###   ########.fr        #
+#    Updated: 2022/03/06 21:00:28 by cyelena          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
 SRCS =	ft_strlen.c ft_strjoin.c ft_atoi.c ft_split.c ft_substr.c\
-		ft_strdup.c ft_strlcpy.c ft_putstr_fd.c ft_putchar_fd.c ft_isdigit.c
+		ft_strdup.c ft_strlcpy.c ft_putstr_fd.c ft_putchar_fd.c ft_isdigit.c\
+		ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c\
+		ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c ft_memset.c
 
 HEAD = libft.h
 

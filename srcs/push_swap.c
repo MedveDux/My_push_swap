@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 11:06:34 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/04 22:06:59 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/06 21:06:25 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,6 @@ int	ft_count(char **argv)
 		i = 0;
 		while (array[i])
 		{
-			// printf("array: %s\n", array[i]);
 			count++;
 			free(array[i++]);
 		}
@@ -243,26 +242,60 @@ void	ft_median(int *array, int count, t_median *data)
 	data->median = array[(count - 1) / 2];
 }
 
+// void stacks_init(t_stacks *ps)
+// {
+// 	t_list	*a;
+
+// 	ps->a = NULL;
+// 	ps->b = NULL;
+// 	ps->size = 0;
+// }
+void	ft_stacks(t_stacks *ps)
+{
+	int		i;
+	t_list	*tmp;
+
+	i = ps->size;
+	while (i--)
+	{
+		tmp = ft_lstnew(&ps->array[i]);
+		if (tmp)
+			ft_lstadd_front(&ps->a, tmp);
+		else
+		{
+			free(ps->array);
+			while (ps->a != NULL)
+			{
+				tmp = ps->a;
+				ps->a = ps->a->next;
+				free(tmp);
+			}
+			error();
+		}
+	}
+}
+
 int	main(int argc, char **argv)
 {
-	int			*array;
-	int			count;
 	t_median	data;
+	t_stacks	ps;
 
 	if (argc == 1)
 		return (0);
-	array = ft_full_array(argv);
-	count = ft_count(argv);
-	ft_not_repeat(count, array);
-	ft_sort_array(array, count + 1);
-	ft_median(array, count, &data);
+	ft_memset(&ps, 0, sizeof(ps));
+	ps.array = ft_full_array(argv);
+	ps.size = ft_count(argv);
+	ft_not_repeat(ps.size, ps.array);
+	ft_stacks(&ps);
+	ft_sort_array(ps.array, ps.size + 1);
+	ft_median(ps.array, ps.size, &data);
 	// array = ft_array(argc, argv);
 
-	
+
 	int	i = 0;
-	while (i < count)
+	while (i < ps.size)
 	{
-		printf("%d\n",array[i]);
+		printf("%d\n",ps.a->content);
 		i++;
 	}
 		

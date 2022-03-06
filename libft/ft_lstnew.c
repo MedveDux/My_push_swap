@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 11:06:40 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/06 20:28:48 by cyelena          ###   ########.fr       */
+/*   Created: 2022/03/06 16:02:26 by cyelena           #+#    #+#             */
+/*   Updated: 2022/03/06 16:02:29 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include "../libft/libft.h"
-
-typedef struct s_median
+t_list	*ft_lstnew(void *content)
 {
-	int	max;
-	int	min;
-	int	median;
-}	t_median;
+	t_list	*new;
 
-typedef struct s_stacks
-{
-	t_list			*a;
-	t_list			*b;
-	int				size;
-	int				*array;
-	//struct s_stacks	*next;
-}	t_stacks;
-
-#endif
+	new = (t_list *)malloc(sizeof(t_list));
+	if (!new)
+		return (0);
+	new -> content = content;
+	new -> next = NULL;
+	return (new);
+}

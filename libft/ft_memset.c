@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 11:06:40 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/06 20:28:48 by cyelena          ###   ########.fr       */
+/*   Created: 2022/03/06 20:36:21 by cyelena           #+#    #+#             */
+/*   Updated: 2022/03/06 20:36:23 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include "../libft/libft.h"
-
-typedef struct s_median
+void	*ft_memset(void *b, int c, size_t len)
 {
-	int	max;
-	int	min;
-	int	median;
-}	t_median;
+	unsigned char	*s;
+	size_t			i;
 
-typedef struct s_stacks
-{
-	t_list			*a;
-	t_list			*b;
-	int				size;
-	int				*array;
-	//struct s_stacks	*next;
-}	t_stacks;
-
-#endif
+	s = b;
+	i = 0;
+	while (i < len)
+	{
+		s[i] = c;
+		i++;
+	}
+	return (s);
+}

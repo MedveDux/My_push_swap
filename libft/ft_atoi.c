@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 19:38:41 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/04 19:11:45 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/06 16:57:17 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_atoi(const char *str)
 
 	negative = 1;
 	res = 0;
-	if ((*str == '-' || *str == '+') && *(++str) == '\0')
+	if ((*str == '-' || *str == '+') && *(str + 1) == '\0')
 		error();
 	while (*str && (*str == ' ' || *str == '\n' || *str == '\t' || \
 		*str == '\v' || *str == '\f' || *str == '\r'))
