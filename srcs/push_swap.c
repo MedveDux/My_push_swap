@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 11:06:34 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/06 21:06:25 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/08 16:38:33 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,10 @@ void	ft_sort_array(int *array, int argc)
 	}
 }
 
+/*
+*	Malloc array
+*	Checking the array for digit and atoi(not repeat)	
+*/
 int	*ft_sort_full_array(int count, char **argv)
 {
 	char	**sent_array;
@@ -178,7 +182,9 @@ int	*ft_sort_full_array(int count, char **argv)
 	free(sent_array);
 	return (array);
 }
-
+/*
+* The count that will be used ta malloc array	
+*/
 int	*ft_full_array(char **argv)
 {
 	int		j;
@@ -234,7 +240,9 @@ int	ft_count(char **argv)
 	}
 	return (count);
 }
-
+/*
+*	Filling in the structure taking into account the array
+*/
 void	ft_median(int *array, int count, t_median *data)
 {
 	data->min = array[0];
@@ -250,6 +258,10 @@ void	ft_median(int *array, int count, t_median *data)
 // 	ps->b = NULL;
 // 	ps->size = 0;
 // }
+
+/*
+*	Creating lst
+*/
 void	ft_stacks(t_stacks *ps)
 {
 	int		i;
@@ -273,12 +285,28 @@ void	ft_stacks(t_stacks *ps)
 			error();
 		}
 	}
+	ps->size_a = ps->size;
+}
+
+void	ft_three(t_stacks *ps)
+{
+	int	first;
+	int	second;
+	int	third;
+
+	first = *(int *)ps->a->content;
+	second = *(int *)ps->a->next->content;
+	third = *(int *)ps->a->next->next->content;
+
+	
 }
 
 int	main(int argc, char **argv)
 {
 	t_median	data;
 	t_stacks	ps;
+	int			*array;
+	int			k;
 
 	if (argc == 1)
 		return (0);
@@ -286,19 +314,31 @@ int	main(int argc, char **argv)
 	ps.array = ft_full_array(argv);
 	ps.size = ft_count(argv);
 	ft_not_repeat(ps.size, ps.array);
+	array = malloc(sizeof(int *) * ps.size);
+	k = -1;
+	while (++k < ps.size)
+		array[k] = (ps.array)[k];
 	ft_stacks(&ps);
-	ft_sort_array(ps.array, ps.size + 1);
-	ft_median(ps.array, ps.size, &data);
+	ft_sort_array(array, ps.size + 1);
+	ft_median(array, ps.size, &data);
+	if (argc == 4)
+		ft_three(&ps);
 	// array = ft_array(argc, argv);
 
 
 	int	i = 0;
 	while (i < ps.size)
 	{
-		printf("%d\n",ps.a->content);
+		printf("content %d\n", *(int *)ps.a->content);
+		ps.a = ps.a->next;
 		i++;
 	}
-		
+	i = 0;
+	while (i < ps.size)
+	{
+		printf("array %d\n", array[i]);
+		i++;
+	}
 	printf("[%d]\n", data.max);
 	printf("[%d]\n", data.min);
 	printf("[%d]\n", data.median);

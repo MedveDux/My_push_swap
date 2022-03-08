@@ -1,38 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   rule_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 11:06:40 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/08 16:36:53 by cyelena          ###   ########.fr       */
+/*   Created: 2022/02/23 17:54:06 by cyelena           #+#    #+#             */
+/*   Updated: 2022/03/08 18:48:33 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "../headers/push_swap.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include "../libft/libft.h"
-
-typedef struct s_median
+void	swap(t_list **a)
 {
-	int	max;
-	int	min;
-	int	median;
-}	t_median;
+	t_list	*tmp;
 
-typedef struct s_stacks
+	if ((*a) == NULL || (*a)->next == NULL)
+		return ;
+	tmp = *a;
+	*a = (*a)->next;
+	tmp->next = (*a)->next;
+	(*a)->next = tmp;
+}
+
+void	sa(t_stacks *ps)
 {
-	t_list			*a;
-	t_list			*b;
-	int				size;
-	int				size_a;
-	int				size_b;
-	int				*array;
-}	t_stacks;
+	swap(&ps->a);
+	write (1, "sa\n", 3);
+}
 
-#endif
+void	sb(t_stacks *ps)
+{
+	swap(&ps->b);
+	write (1, "sb\n", 3);
+}
+
+void	ss(t_stacks *ps)
+{
+	swap(&ps->a);
+	swap(&ps->b);
+	write (1, "ss\n", 3);
+}
