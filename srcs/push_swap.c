@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 11:06:34 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/08 16:38:33 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/08 20:10:01 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,8 +297,31 @@ void	ft_three(t_stacks *ps)
 	first = *(int *)ps->a->content;
 	second = *(int *)ps->a->next->content;
 	third = *(int *)ps->a->next->next->content;
-
-	
+	if (first > second)
+	{
+		if (second > third)
+		{
+			sa(ps);
+			rra(ps);
+		}
+		else
+		{
+			if (third < first)
+				ra(ps);
+			else
+				sa(ps);
+		}
+	}
+	else
+	{
+		if (first > third)
+			rra(ps);
+		else
+		{
+			sa(ps);
+			ra(ps);
+		}
+	}
 }
 
 int	main(int argc, char **argv)
