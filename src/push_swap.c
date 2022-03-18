@@ -6,34 +6,42 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 11:06:34 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/08 20:10:01 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/18 19:51:59 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/push_swap.h"
 
-void	error(void)
+static void ft_clear(int **array)
 {
-	ft_putstr_fd("error", 2);
+	free(*array);
+	*array = NULL;
+	printf("free array\n");
+	error();
+}
+void error(void)
+{
+	ft_putstr_fd("Error\n", 2);
 	exit(1);
 }
 
-void	ft_digit_value(char *s)
-{
-	while (*s && (*s == ' ' || *s == '\n' || *s == '\t' \
-		|| *s == '\v' || *s == '\f' || *s == '\r'))
-	{
-		s++;
-	}
-	if (*s && (*s == '+' || *s == '-'))
-		s++;
-	while (*s)
-	{
-		if (ft_isdigit(*s) != 1)
-			error();
-		s++;
-	}
-}
+// int	ft_digit_value(char *s)
+// {
+// 	while (*s && (*s == ' ' || *s == '\n' || *s == '\t' \
+// 		|| *s == '\v' || *s == '\f' || *s == '\r'))
+// 	{
+// 		s++;
+// 	}
+// 	if (*s && (*s == '+' || *s == '-'))
+// 		s++;
+// 	while (*s)
+// 	{
+// 		if (ft_isdigit(*s) != 1)
+// 			return (-1);
+// 		s++;
+// 	}
+// 	return (0);
+// }
 
 // int	ft_long_long(char *s)
 // {
@@ -47,10 +55,10 @@ void	ft_digit_value(char *s)
 // 	return (0);
 // }
 
-void	ft_not_repeat(int k, int *array)
+void ft_not_repeat(int k, int *array)
 {
-	int	i;
-	int	j;
+	int i;
+	int j;
 
 	i = -1;
 	j = 0;
@@ -60,7 +68,7 @@ void	ft_not_repeat(int k, int *array)
 		while (++j < k)
 		{
 			if (array[i] == array[j])
-				error(); //free
+				ft_clear(&array);
 		}
 	}
 }
@@ -125,11 +133,11 @@ void	ft_not_repeat(int k, int *array)
 // 	return (array);
 // }
 
-void	ft_sort_array(int *array, int argc)
+void ft_sort_array(int *array, int argc)
 {
-	int	i;
-	int	j;
-	int	temp;
+	int i;
+	int j;
+	int temp;
 
 	i = -1;
 	while (++i < argc - 1)
@@ -148,78 +156,85 @@ void	ft_sort_array(int *array, int argc)
 }
 
 /*
-*	Malloc array
-*	Checking the array for digit and atoi(not repeat)	
-*/
-int	*ft_sort_full_array(int count, char **argv)
+ *	Malloc array
+ *	Checking the array for digit and atoi(not repeat)
+ */
+int *ft_full_array(int count, char **argv)
 {
-	char	**sent_array;
-	int		*array;
-	int		i;
-	int		j;
-	int		k;
+	char **sent_array;
+	int *array;
+	int i;
+	int j;
+	int flag;
 
 	i = 1;
-	k = 0;
+	flag = 0;
 	array = malloc(count * sizeof(int));
+	printf("malloc array\n");
 	if (!array)
 		error();
-	while (argv[i])
+	count = 0;
+	while (argv[i] && !flag)
 	{
 		sent_array = ft_split(argv[i], ' ');
 		if (!sent_array)
-			error();
+			ft_clear(&array);
 		i++;
 		j = 0;
 		while (sent_array[j])
 		{
-			ft_digit_value((sent_array[j]));
-			array[k] = ft_atoi(sent_array[j]);
-			k++;
+			if (!flag)
+			{
+				if (ft_atoi(sent_array[j], &array[count]) == -1)
+					flag = -1;
+				count++;
+			}
 			free(sent_array[j++]);
 		}
+		free(sent_array);
 	}
-	free(sent_array);
+	if (flag == -1)
+		ft_clear(&array);
 	return (array);
 }
 /*
-* The count that will be used ta malloc array	
-*/
-int	*ft_full_array(char **argv)
-{
-	int		j;
-	int		count;
-	int		i;
-	char	**array;
-	int		*sent_array;
+ * The count that will be used ta malloc array
+ */
+// int	*ft_full_array(char **argv)
+// {
+// 	int		j;
+// 	int		count;
+// 	int		i;
+// 	char	**array;
+// 	int		*sent_array;
 
-	count = 0;
-	i = 0;
-	j = 1;
-	while (argv[j])
-	{
-		array = ft_split(argv[j], ' ');
-		if (!array)
-			error();
-		j++;
-		i = 0;
-		while (array[i])
-		{
-			count++;
-			free(array[i++]);
-		}
-		free(array);
-	}
-	sent_array = ft_sort_full_array(count, argv);
-	return (sent_array);
-}
+// 	count = 0;
+// 	i = 0;
+// 	j = 1;
+// 	while (argv[j])
+// 	{
+// 		array = ft_split(argv[j], ' ');
+// 		if (!array)
+// 			error();
+// 		j++;
+// 		i = 0;
+// 		while (array[i])
+// 		{
+// 			count++;
+// 			free(array[i++]);
+// 		}
+// 		free(array);
+// 	}
+// 	sent_array = ft_sort_full_array(count, argv);
+// 	return (sent_array);
+// }
 
-int	ft_count(char **argv)
+int ft_count(char **argv)
 {
-	int		j;
-	int		count;
-	int		i;
-	char	**array;
+	int j;
+	int count;
+	int i;
+	char **array;
 
 	count = 0;
 	i = 0;
@@ -241,9 +256,9 @@ int	ft_count(char **argv)
 	return (count);
 }
 /*
-*	Filling in the structure taking into account the array
-*/
-void	ft_median(int *array, int count, t_median *data)
+ *	Filling in the structure taking into account the array
+ */
+void ft_median(int *array, int count, t_median *data)
 {
 	data->min = array[0];
 	data->max = array[count - 1];
@@ -260,12 +275,12 @@ void	ft_median(int *array, int count, t_median *data)
 // }
 
 /*
-*	Creating lst
-*/
-void	ft_stacks(t_stacks *ps)
+ *	Creating lst
+ */
+void ft_stacks(t_stacks *ps, int *array)
 {
-	int		i;
-	t_list	*tmp;
+	int i;
+	t_list *tmp;
 
 	i = ps->size;
 	while (i--)
@@ -281,89 +296,68 @@ void	ft_stacks(t_stacks *ps)
 				tmp = ps->a;
 				ps->a = ps->a->next;
 				free(tmp);
+				printf("free tmp\n");
 			}
+			free(array);
+			printf("free array sort\n");
 			error();
 		}
 	}
 	ps->size_a = ps->size;
 }
-
-void	ft_three(t_stacks *ps)
+void sorter(t_stacks *ps, t_median data)
 {
-	int	first;
-	int	second;
-	int	third;
-
-	first = *(int *)ps->a->content;
-	second = *(int *)ps->a->next->content;
-	third = *(int *)ps->a->next->next->content;
-	if (first > second)
-	{
-		if (second > third)
-		{
-			sa(ps);
-			rra(ps);
-		}
-		else
-		{
-			if (third < first)
-				ra(ps);
-			else
-				sa(ps);
-		}
-	}
-	else
-	{
-		if (first > third)
-			rra(ps);
-		else
-		{
-			sa(ps);
-			ra(ps);
-		}
-	}
+	if (ps->size == 3)
+		ft_three(ps);
+	if (ps->size == 5)
+		ft_five(ps, data);
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_median	data;
-	t_stacks	ps;
-	int			*array;
-	int			k;
+	t_median data;
+	t_stacks ps;
+	int *array;
+	int k;
 
 	if (argc == 1)
 		return (0);
 	ft_memset(&ps, 0, sizeof(ps));
-	ps.array = ft_full_array(argv);
 	ps.size = ft_count(argv);
+	ps.array = ft_full_array(ps.size, argv);
 	ft_not_repeat(ps.size, ps.array);
-	array = malloc(sizeof(int *) * ps.size);
+	array = malloc(sizeof(int) * ps.size);
+	printf("malloc array sort\n");
 	k = -1;
 	while (++k < ps.size)
 		array[k] = (ps.array)[k];
-	ft_stacks(&ps);
+	ft_stacks(&ps, array);
 	ft_sort_array(array, ps.size + 1);
 	ft_median(array, ps.size, &data);
-	if (argc == 4)
-		ft_three(&ps);
-	// array = ft_array(argc, argv);
+	sorter(&ps, data);
+	printf("free array\n");
+	free(ps.array);
+	free(array);
+	ft_lstclear(&ps.a);
+	ft_lstclear(&ps.b);
 
+	printf("free array sort\n");
 
-	int	i = 0;
-	while (i < ps.size)
-	{
-		printf("content %d\n", *(int *)ps.a->content);
-		ps.a = ps.a->next;
-		i++;
-	}
-	i = 0;
-	while (i < ps.size)
-	{
-		printf("array %d\n", array[i]);
-		i++;
-	}
-	printf("[%d]\n", data.max);
-	printf("[%d]\n", data.min);
-	printf("[%d]\n", data.median);
+	// int	i = 0;
+	// while (i < ps.size)
+	// {
+	// 	printf("content %d\n", *(int *)ps.a->content);
+	// 	ps.a = ps.a->next;
+	// 	i++;
+	// }
+	// i = 0;
+	// while (i < ps.size)
+	// {
+	// 	printf("array %d\n", array[i]);
+	// 	i++;
+	// }
+	// printf("[%d]\n", data.max);
+	// printf("[%d]\n", data.min);
+	// printf("[%d]\n", data.median);
 	return (0);
 }
