@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 11:06:34 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/19 15:25:27 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/18 19:51:59 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void ft_clear(int **array)
 {
 	free(*array);
 	*array = NULL;
+	printf("free array\n");
 	error();
 }
 void error(void)
@@ -169,6 +170,7 @@ int *ft_full_array(int count, char **argv)
 	i = 1;
 	flag = 0;
 	array = malloc(count * sizeof(int));
+	printf("malloc array\n");
 	if (!array)
 		error();
 	count = 0;
@@ -294,8 +296,10 @@ void ft_stacks(t_stacks *ps, int *array)
 				tmp = ps->a;
 				ps->a = ps->a->next;
 				free(tmp);
+				printf("free tmp\n");
 			}
 			free(array);
+			printf("free array sort\n");
 			error();
 		}
 	}
@@ -323,6 +327,7 @@ int main(int argc, char **argv)
 	ps.array = ft_full_array(ps.size, argv);
 	ft_not_repeat(ps.size, ps.array);
 	array = malloc(sizeof(int) * ps.size);
+	printf("malloc array sort\n");
 	k = -1;
 	while (++k < ps.size)
 		array[k] = (ps.array)[k];
@@ -330,10 +335,13 @@ int main(int argc, char **argv)
 	ft_sort_array(array, ps.size + 1);
 	ft_median(array, ps.size, &data);
 	sorter(&ps, data);
+	printf("free array\n");
 	free(ps.array);
 	free(array);
 	ft_lstclear(&ps.a);
 	ft_lstclear(&ps.b);
+
+	printf("free array sort\n");
 
 	// int	i = 0;
 	// while (i < ps.size)
