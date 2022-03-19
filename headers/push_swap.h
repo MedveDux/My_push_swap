@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 11:06:40 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/18 18:31:01 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/19 18:15:30 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,15 @@ typedef struct s_stacks
 	int				size_b;
 	int				*array;
 }	t_stacks;
+
+typedef struct s_score_tmp
+{
+	int	ra_score;
+	int	rra_score;
+	int	rb_score;
+	int	rrb_score;
+}	t_score_tmp;
+
 void	error(void);
 // rule
 void	push(t_list **src, t_list **dest);
@@ -55,6 +64,7 @@ void	ss(t_stacks *ps);
 void	ft_presort_three(t_stacks *ps);
 void	ft_three(t_stacks *ps);
 //sort five 5
-void	ft_five(t_stacks *ps, t_median data);
+void	ft_five(t_stacks *ps);
+
 
 #endif
