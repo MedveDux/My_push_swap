@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 17:23:21 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/19 16:12:32 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/20 20:30:37 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ void	ft_five(t_stacks *ps)
 		pb(ps);
 	}
 	ft_three(ps);
-	while (ps->size_a < 5)
+	// while (ps->size_a < 5)
+	// 	pa(ps);
+	while (ps->size_b != 0)
 		pa(ps);
 }
 // void	ft_five(t_stacks *ps, t_median data)
