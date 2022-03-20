@@ -6,24 +6,24 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:47:49 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/19 19:44:09 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/20 16:11:05 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/push_swap.h"
 
-void	pb_in_b_full(t_stacks *ps, t_median *data, int *array)
+void	pb_in_b_full(t_stacks *ps, t_median *data)
 {
 	t_list	*head;
 	int		i;
 
-	i = array[data->median];
+	i = data->median;
 	head = ps->a;
 	while (ps->size_a > 3)
 	{
-		if (*(int *)head->content != array[data->min]
-			&& *(int *)head->content != array[data->max]
-			&& *(int *)head->content != array[data->median])
+		if (*(int *)head->content != data->min
+			&& *(int *)head->content != data->max
+			&& *(int *)head->content != data->median)
 		{
 			pb(ps);
 			if (*(int *)ps->b->content < i)
@@ -104,11 +104,11 @@ void	sort_util(t_stacks *ps)
 	}
 }
 
-void	sort(t_stacks *ps, t_median *data, int *array)
+void	sort(t_stacks *ps, t_median *data)
 {
 	if (ps->size_a >= 5)
 	{
-		pb_in_b_full(ps, data, array);
+		pb_in_b_full(ps, data);
 		ft_presort_three(ps);
 		sort_util(ps);
 		final_rotate(ps);

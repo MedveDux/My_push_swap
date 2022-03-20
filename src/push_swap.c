@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 11:06:34 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/19 17:10:21 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/20 19:50:56 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void ft_clear(int **array)
 {
 	free(*array);
-	printf("array free\n");
 	*array = NULL;
 	error();
 }
@@ -170,7 +169,6 @@ int *ft_full_array(int count, char **argv)
 	i = 1;
 	flag = 0;
 	array = malloc(count * sizeof(int));
-	printf("ps.array\n");
 	if (!array)
 		error();
 	count = 0;
@@ -304,33 +302,49 @@ void ft_stacks(t_stacks *ps, int *array)
 	ps->size_a = ps->size;
 }
 
-void sorter(t_stacks *ps, t_median *data, int *array)
+void sorter(t_stacks *ps, t_median *data)
 {
 	if (ps->size == 2)
 		sa(ps);
-	if (ps->size < 4)
+	else if (ps->size < 4)
 		ft_three(ps);
 	else if (ps->size < 6)
 		ft_five(ps);
 	else
-		sort(ps, &data, array);//&
+		sort(ps, data);
 }
 
 int	ft_cheaking_for_sortint(t_stacks *ps)
 {
-	t_list *tmp;// may be free
+	t_list *tmp;
 
 	tmp = ps->a;
 	while (tmp && tmp->next)
 	{
 		if (*(int *)(tmp->content) > *(int *)(tmp->next->content))
 		{
-			return (0);
+			return (1);
 		}
 		tmp = tmp->next;
 	}
-	return (1);
+	return (0);
 }
+// int	cheakig_for_sorting(int *array, int size)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	size--;
+// 	while (size)
+// 	{
+// 		if (array[i] > array[i + 1])
+// 			return (1);
+// 		i++;
+// 		size--;	
+// 	}
+// 	return (0);
+	
+// }
 
 int main(int argc, char **argv)
 {
@@ -346,26 +360,37 @@ int main(int argc, char **argv)
 	ps.array = ft_full_array(ps.size, argv);
 	ft_not_repeat(ps.size, ps.array);
 	array = malloc(sizeof(int) * ps.size);
-	printf("array\n");
 	k = -1;
 	while (++k < ps.size)
 		array[k] = (ps.array)[k];
 	ft_stacks(&ps, array);
+	// if (cheakig_for_sorting(array, ps.size) == 1)
+	// {
+	// 	free(ps.array);
+	// 	ps.array = NULL;
+	// 	free(array);
+	// 	array = NULL;
+	// 	ps.a = NULL;
+	// 	return (0);
+	// }
 	ft_sort_array(array, ps.size + 1);
-	ft_median(array, ps.size, &data);//убери не точно
-	if (ft_cheaking_for_sortint(&ps) == 1)
+	ft_median(array, ps.size, &data);
+	if (ft_cheaking_for_sortint(&ps) == 0)
 	{
 		free(ps.array);
-		printf("ps.array free\n");
+		ps.array = NULL;
 		free(array);
-		printf("ps.array\n");
+		array = NULL;
+		ft_lstclear(&ps.a);
+		ft_lstclear(&ps.b);
+		// ps.a = NULL;
 		return (0);
 	}
-	sorter(&ps, &data, array);
+	sorter(&ps, &data);
 	free(ps.array);
-	printf("ps.array free\n");
+	ps.array = NULL;
 	free(array);
-	printf("array free\n");
+
 	ft_lstclear(&ps.a);
 	ft_lstclear(&ps.b);
 

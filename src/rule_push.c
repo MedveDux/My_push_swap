@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 18:46:43 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/16 13:44:43 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/20 18:52:30 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	pb(t_stacks	*ps)
 		ps->size_a -= 1;
 		ps->size_b += 1;
 		push(&ps->a, &ps->b);
+		if (ps->size_a == 0)
+			ps->a = NULL;
 	}
 	write(1, "pb\n", 3);
 }
@@ -41,6 +43,8 @@ void	pa(t_stacks	*ps)
 		ps->size_a += 1;
 		ps->size_b -= 1;
 		push(&ps->b, &ps->a);
+		if (ps->size_b == 0)
+			ps->b = NULL;
 	}
 	write(1, "pa\n", 3);
 }

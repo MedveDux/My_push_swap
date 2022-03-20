@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 19:38:41 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/18 18:43:08 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/20 17:01:36 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int	ft_atoi(const char *str, int *number)
 		return (-1);
 	while (*str && *str >= '0' && *str <= '9')
 	{
+		res = res * 10 + (*str - '0');
 		if ((res > (unsigned int)(-1) / 2 && negative == 1)
 			|| (res > ((unsigned int)(-1) / 2 + 1) && negative == -1))
 			return (-1);
-		res = res * 10 + (*str - '0');
 		++str;
 	}
 	if (*str)

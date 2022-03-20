@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 11:06:40 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/19 18:15:30 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/20 16:32:06 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <limits.h>
 # include "../libft/libft.h"
 
 typedef struct s_median
@@ -65,6 +66,16 @@ void	ft_presort_three(t_stacks *ps);
 void	ft_three(t_stacks *ps);
 //sort five 5
 void	ft_five(t_stacks *ps);
-
-
+//sort
+void	pb_in_b_full(t_stacks *ps, t_median *data);
+void	final_rotate(t_stacks *ps);
+void	rotator(t_stacks *ps, t_list *min);
+void	sort_util(t_stacks *ps);
+void	sort(t_stacks *ps, t_median *data);
+//scoring
+int		abs(int c);
+int		max_abs(int a, int b);
+int		num_optim(int a1, int b1);
+int		analyzer_a(t_stacks *ps, int value_b);
+int		scoring(t_stacks *ps, t_list *e, int i);
 #endif
