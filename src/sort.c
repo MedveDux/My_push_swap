@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:47:49 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/20 16:11:05 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/20 21:32:23 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	pb_in_b_full(t_stacks *ps, t_median *data)
 	head = ps->a;
 	while (ps->size_a > 3)
 	{
+		// printf("%d", *(int *)head->content);
+		// write(1, "1", 1);
 		if (*(int *)head->content != data->min
 			&& *(int *)head->content != data->max
 			&& *(int *)head->content != data->median)
@@ -111,6 +113,6 @@ void	sort(t_stacks *ps, t_median *data)
 		pb_in_b_full(ps, data);
 		ft_presort_three(ps);
 		sort_util(ps);
-		final_rotate(ps);
+		// final_rotate(ps);
 	}
 }

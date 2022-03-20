@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 15:38:37 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/06 19:35:22 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/20 21:30:28 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		return ;
 	if (!*lst)
 	{
+		new->next = NULL;
 		*lst = new;
 		return ;
 	}

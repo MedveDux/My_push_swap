@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 18:46:43 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/20 18:52:30 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/20 21:28:23 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	push(t_list **src, t_list **dest)
 		return ;
 	tmp = *src;
 	*src = (*src)->next;
+	tmp->next = NULL;
 	ft_lstadd_front(dest, tmp);
 }
 
