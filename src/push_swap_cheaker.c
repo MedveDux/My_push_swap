@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 19:41:32 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/22 19:44:55 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/22 20:55:49 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int	ft_count(char **argv)
 	while (argv[j])
 	{
 		array = ft_split(argv[j], ' ');
+		if (!ft_strncmp("", argv[1], 1))
+			error();
 		if (!array)
 			error();
 		j++;
