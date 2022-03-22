@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 11:06:34 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/20 20:43:44 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/22 17:07:52 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -395,7 +395,7 @@ int main(int argc, char **argv)
 	ft_lstclear(&ps.b);
 
 	// int	i = 0;
-	// while (i < ps.size)
+	// while (ps.a)
 	// {
 	// 	printf("content %d\n", *(int *)ps.a->content);
 	// 	ps.a = ps.a->next;

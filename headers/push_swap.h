@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 11:06:40 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/20 16:32:06 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/22 17:33:40 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_three(t_stacks *ps);
 void	ft_five(t_stacks *ps);
 //sort
 void	pb_in_b_full(t_stacks *ps, t_median *data);
-void	final_rotate(t_stacks *ps);
+void	final_rotate(t_stacks *ps, t_median *data);
 void	rotator(t_stacks *ps, t_list *min);
 void	sort_util(t_stacks *ps);
 void	sort(t_stacks *ps, t_median *data);
