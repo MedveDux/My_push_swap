@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:47:49 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/22 17:33:23 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/22 20:04:29 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	pb_in_b_full(t_stacks *ps, t_median *data)
 	head = ps->a;
 	while (ps->size_a > 3)
 	{
-		// printf("%d", *(int *)head->content);
-		// write(1, "1", 1);
 		if (*(int *)head->content != data->min
 			&& *(int *)head->content != data->max
 			&& *(int *)head->content != data->median)
@@ -85,8 +83,6 @@ void	sort_util(t_stacks *ps)
 	t_list	*min;
 	t_list	*tmp;
 
-	// int k = 0;
-
 	while (ps->size_b > 0)
 	{
 		i = 0;
@@ -95,12 +91,6 @@ void	sort_util(t_stacks *ps)
 		num_optomize = scoring(ps, tmp, i);
 		while (tmp->next)
 		{
-	// 	write(1, "2",1);
-	// // printf("[cont = %d]\n", ps->size_b);
-	// // if (k == 3)
-	// // 	return ;
-	// // k++;
-			// printf("bad");
 			tmp = tmp->next;
 			i++;
 			if (num_optomize > scoring(ps, tmp, i))
@@ -109,8 +99,8 @@ void	sort_util(t_stacks *ps)
 				num_optomize = scoring(ps, tmp, i);
 			}
 		}
-			rotator(ps, min);
-			pa(ps);
+		rotator(ps, min);
+		pa(ps);
 	}
 }
 
@@ -120,7 +110,6 @@ void	sort(t_stacks *ps, t_median *data)
 	{
 		pb_in_b_full(ps, data);
 		ft_presort_three(ps);
-		// printf("[1]\n");
 		sort_util(ps);
 		final_rotate(ps, data);
 	}

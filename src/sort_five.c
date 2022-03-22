@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 17:23:21 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/20 20:30:37 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/22 20:04:42 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,30 +50,6 @@ void	ft_five(t_stacks *ps)
 		pb(ps);
 	}
 	ft_three(ps);
-	// while (ps->size_a < 5)
-	// 	pa(ps);
 	while (ps->size_b != 0)
 		pa(ps);
 }
-// void	ft_five(t_stacks *ps, t_median data)
-// {
-// 	while (ps->size_a > 3)
-// 	{
-// 		if (*(int *)ps->a->content == data.max || \
-// 			*(int *)ps->a->content == data.min)
-// 			pb(ps);
-// 		else
-// 			ra(ps);
-// 	}
-// 	ft_three(ps);
-// 	while (ps->size_b != 0)
-// 	{
-// 		if (*(int *)ps->b->content == data.max)
-// 		{
-// 			pa(ps);
-// 			ra(ps);
-// 		}
-// 		else
-// 			pa(ps);
-// 	}
-// }

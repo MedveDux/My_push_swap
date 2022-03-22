@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 11:06:40 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/22 17:33:40 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/22 20:03:29 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,19 @@ typedef struct s_score_tmp
 	int	rb_score;
 	int	rrb_score;
 }	t_score_tmp;
-
+void	ft_clear(int **array);
 void	error(void);
+
+int		ft_count(char **argv);
+void	ft_sort_array(int *array, int argc);
+void	ft_not_repeat(int k, int *array);
+void	initilization(int *i, int **array, int *flag, int *count);
+void	if_sent(int *i, int *j, char **sent_array, int *array);
+int		*ft_full_array(int count, char **argv);
+void	ft_median(int *array, int count, t_median *data);
+void	ft_stacks(t_stacks *ps, int *array);
+void	sorter(t_stacks *ps, t_median *data);
+int		ft_cheaking_for_sortint(t_stacks *ps);
 // rule
 void	push(t_list **src, t_list **dest);
 void	pb(t_stacks	*ps);
