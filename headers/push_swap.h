@@ -6,7 +6,7 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 11:06:40 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/22 20:03:29 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/29 19:03:31 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,20 @@ void	sorter(t_stacks *ps, t_median *data);
 int		ft_cheaking_for_sortint(t_stacks *ps);
 // rule
 void	push(t_list **src, t_list **dest);
-void	pb(t_stacks	*ps);
-void	pa(t_stacks	*ps);
+void	pb(t_stacks	*ps, int i);
+void	pa(t_stacks	*ps, int i);
 void	reverse_rotate(t_list **a);
-void	rra(t_stacks *ps);
-void	rrb(t_stacks *ps);
-void	rrr(t_stacks *ps);
+void	rra(t_stacks *ps, int i);
+void	rrb(t_stacks *ps, int i);
+void	rrr(t_stacks *ps, int i);
 void	rotate(t_list **a);
-void	ra(t_stacks *ps);
-void	rb(t_stacks *ps);
-void	rr(t_stacks *ps);
+void	ra(t_stacks *ps, int i);
+void	rb(t_stacks *ps, int i);
+void	rr(t_stacks *ps, int i);
 void	swap(t_list **a);
-void	sa(t_stacks *ps);
-void	sb(t_stacks *ps);
-void	ss(t_stacks *ps);
+void	sa(t_stacks *ps, int i);
+void	sb(t_stacks *ps, int i);
+void	ss(t_stacks *ps, int i);
 //sort three 3
 void	ft_presort_three(t_stacks *ps);
 void	ft_three(t_stacks *ps);

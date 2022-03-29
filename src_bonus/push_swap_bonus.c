@@ -6,18 +6,75 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 18:35:49 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/29 18:40:04 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/03/29 20:56:22 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/push_swap_bonus.h"
 
+void	executer(char *line, t_stacks *ps)
+{
+	if (!ft_strncmp(line, "sa\n", 4))
+		sa(ps, 0);
+	else if (!ft_strncmp(line, "sb\n", 4))
+		sb(ps, 0);
+	else if (!ft_strncmp(line, "ss\n", 4))
+		ss(ps, 0);
+	else if (!ft_strncmp(line, "ra\n", 4))
+		ra(ps, 0);
+	else if (!ft_strncmp(line, "rb\n", 4))
+		rb(ps, 0);
+	else if (!ft_strncmp(line, "rr\n", 4))
+		rr(ps, 0);
+	else if (!ft_strncmp(line, "rra\n", 5))
+		rra(ps, 0);
+	else if (!ft_strncmp(line, "rrb\n", 5))
+		rrb(ps, 0);
+	else if (!ft_strncmp(line, "rrr\n", 5))
+		rrr(ps, 0);
+	else if (!ft_strncmp(line, "pa\n", 4))
+		pa(ps, 0);
+	else if (!ft_strncmp(line, "pb\n", 4))
+		pb(ps, 0);
+	else
+	{
+		free(ps->array);
+		ps->array = NULL;
+		ft_lstclear(&ps->a);
+		ft_lstclear(&ps->b);
+		ft_putstr_fd("Error\n", 2);
+		exit(EXIT_FAILURE);
+	}
+}
+
+void	cmd_parser(t_stacks *ps)
+{
+	char	*line;
+
+	line = get_next_line(STDIN_FILENO);
+	while (line)
+	{
+		executer(line, ps);
+		free(line);
+		line = get_next_line(STDIN_FILENO);
+	}
+	free(line);
+}
+
+int	ft_lst_is_sorted(t_list *lst)
+{
+	while (lst && lst->next)
+	{
+		if (*(int *)(lst->content) > *(int *)(lst->next->content))
+			return (0);
+		lst = lst->next;
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
-	t_median	data;
 	t_stacks	ps;
-	int			*array;
-	int			k;
 
 	if (argc == 1)
 		return (0);
@@ -25,18 +82,15 @@ int	main(int argc, char **argv)
 	ps.size = ft_count(argv);
 	ps.array = ft_full_array(ps.size, argv);
 	ft_not_repeat(ps.size, ps.array);
-	array = malloc(sizeof(int) * ps.size);
-	k = -1;
-	while (++k < ps.size)
-		array[k] = (ps.array)[k];
-	ft_stacks(&ps, array);
-	ft_sort_array(array, ps.size + 1);
-	ft_median(array, ps.size, &data);
-	if (ft_cheaking_for_sortint(&ps) == 0)
-	{
-		add_if(&ps, array);
-		return (0);
-	}
-	init(&ps, array, &data);
+	ft_stacks(&ps, ps.array);
+	cmd_parser(&ps);
+	if (ft_lst_is_sorted(ps.a) && ps.b == NULL)
+		ft_putstr_fd("OK\n", 1);
+	else
+		ft_putstr_fd("KO\n", 1);
+	free(ps.array);
+	ps.array = NULL;
+	ft_lstclear(&ps.a);
+	ft_lstclear(&ps.b);
 	return (0);
 }
