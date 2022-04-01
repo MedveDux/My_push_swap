@@ -6,11 +6,21 @@
 /*   By: cyelena <cyelena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 18:35:49 by cyelena           #+#    #+#             */
-/*   Updated: 2022/03/29 20:56:22 by cyelena          ###   ########.fr       */
+/*   Updated: 2022/04/01 18:10:40 by cyelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/push_swap_bonus.h"
+
+void	ft_error(t_stacks *ps)
+{
+	free(ps->array);
+	ps->array = NULL;
+	ft_lstclear(&ps->a);
+	ft_lstclear(&ps->b);
+	ft_putstr_fd("Error\n", 2);
+	exit(EXIT_FAILURE);
+}
 
 void	executer(char *line, t_stacks *ps)
 {
@@ -37,14 +47,7 @@ void	executer(char *line, t_stacks *ps)
 	else if (!ft_strncmp(line, "pb\n", 4))
 		pb(ps, 0);
 	else
-	{
-		free(ps->array);
-		ps->array = NULL;
-		ft_lstclear(&ps->a);
-		ft_lstclear(&ps->b);
-		ft_putstr_fd("Error\n", 2);
-		exit(EXIT_FAILURE);
-	}
+		ft_error(ps);
 }
 
 void	cmd_parser(t_stacks *ps)
